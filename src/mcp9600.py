@@ -97,6 +97,10 @@ class MCP9600(object):
         self._read_register(MCP9600.REG_COLD_JUNCTION_TEMPERATURE , mv[4:6])
         return struct.unpack('>hhh', buffer)
 
+    def read_temperatures(self) -> Tuple[float,float,float]:
+        hot, delta, cold = self.read_temperatures_raw()
+        return hot/16, delta/16, cold/16
+    
     def read_raw_data_adc(self) -> int:
         data = memoryview(bytearray(4))
         data[3] = 0

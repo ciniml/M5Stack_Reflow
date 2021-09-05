@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MCP9600
+D Thermocouple EMF to Temperature Converter, ±1.5℃ Maximum Accuracy
+K thermocouple,i2c
+$ENDCMP
+#
+#End Doc Library

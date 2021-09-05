@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name HeaterController-rescue)(type Legacy)(uri ${KIPRJMOD}/HeaterController-rescue.lib)(options "")(descr ""))
+  (lib (name HeaterController_local)(type Legacy)(uri ${KIPRJMOD}/HeaterController_local.lib)(options "")(descr ""))
+  (lib (name akiduki_components)(type Legacy)(uri ${KIPRJMOD}/akiduki/akiduki_components.lib)(options "")(descr ""))
+  (lib (name local)(type Legacy)(uri ${KIPRJMOD}/local.lib)(options "")(descr ""))
+)

@@ -102,7 +102,7 @@ class HeaterController(object):
         self.ssrs[0].duty(output_clamped)
         self.ssrs[1].duty(output_clamped/2)
 
-        l.info('target:{:f3.2}, output:{:f4.2}, clamped:{:f3.2}, y:{:f3.2}, p:{:f4.2}, i:{:f4.2}, d:{:f3.2}'.format(self.target_temperature, output, output_clamped, y, p, i, d))
+        l.info('target:{:+.5g}, output:{:+.5g}, clamped:{:+.5g}, y:{:+.5g}, p:{:+.5g}, i:{:+.5g}, d:{:+.5g}'.format(self.target_temperature, output, output_clamped, y, p, i, d))
         if self.log_file is not None:
             self.log_file.write('{},{},{},{},{},{},{}\n'.format(self.target_temperature, output, output_clamped, y, p, i, d))
 
@@ -181,16 +181,24 @@ class ReflowController(object):
         timer = machine.Timer(3)
         timer.init(period=250, mode=timer.PERIODIC, callback=lambda _: hc.update())
 
+        m5stack.speaker.tone(1760, volume=3)
+
         try:
+            last_row = None # type: Optional[Tuple[float,float,str]]
             for row in self.table:
-                l.info('### ' + row[2])
+                l.info('### {}: {} - {}'.format(row[2], row[0], row[1]))
                 count = 0
-                while hc.last_temperature < row[1] == 0 or count < row[1]*8:
+                while (hc.last_temperature < row[0] and row[1] == 0) or count < row[1]*8:
+                    hc.target_temperature = last_row[0] + (row[0] - last_row[0])*count/(row[1]*8) if last_row is not None else row[0]
                     await asyncio.sleep_ms(125)
                     cancel.throw_if_cancelled()
                     count += 1
-            
+                last_row = row
             l.info('### Finished.')
+            m5stack.speaker.tone(1760, volume=3)
+            m5stack.speaker.tone(1760, volume=3)
+            m5stack.speaker.tone(1760, volume=3)
+
         finally:
             timer.deinit()
             hc.shutdown()
@@ -206,7 +214,8 @@ async def main_task():
             rc.start(loop)
         elif m5stack.buttonB.isPressed():
             rc.stop()
-    await asyncio.sleep_ms(500)
+            m5stack.speaker.tone(440, volume=3)
+        await asyncio.sleep_ms(500)
 
 gc.collect()
 

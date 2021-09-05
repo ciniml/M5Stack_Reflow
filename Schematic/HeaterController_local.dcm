@@ -1,0 +1,23 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP FUSE
+D FUSE
+K FUSE
+$ENDCMP
+#
+$CMP FUSE_compact
+D FUSE
+K FUSE
+$ENDCMP
+#
+$CMP NJM2884
+D JRC NJM2884 low dropout regulator
+K JRC,NJM,LDO,regulator
+$ENDCMP
+#
+$CMP ThermocoupleConnector
+D Thermocouple connector
+K thermocouple,connector
+$ENDCMP
+#
+#End Doc Library

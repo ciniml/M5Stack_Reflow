@@ -1,0 +1,8 @@
+(fp_lib_table
+  (lib (name akiduki_power)(type KiCad)(uri "$(KIPRJMOD)/akiduki/akiduki_power.pretty")(options "")(descr ""))
+  (lib (name akiduki_opto)(type KiCad)(uri "$(KIPRJMOD)/akiduki/akiduki_opto.pretty")(options "")(descr ""))
+  (lib (name akiduki_terminal)(type KiCad)(uri "$(KIPRJMOD)/akiduki/akiduki_terminal.pretty")(options "")(descr ""))
+  (lib (name akiduki_protection)(type KiCad)(uri "$(KIPRJMOD)/akiduki/akiduki_protection.pretty")(options "")(descr ""))
+  (lib (name elecrow_terminal)(type KiCad)(uri "$(KIPRJMOD)/elecrow/elecrow_terminal.pretty")(options "")(descr ""))
+  (lib (name local)(type KiCad)(uri ${KIPRJMOD}/local.pretty)(options "")(descr ""))
+)
